@@ -1,0 +1,235 @@
+.pricing {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.pricing-header h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.billing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  color: #666;
+}
+
+.billing-toggle span {
+  transition: color 0.3s ease;
+}
+
+.billing-toggle span.active {
+  color: #667eea;
+}
+
+.toggle-btn {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-slider.annual {
+  transform: translateX(30px);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.save-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #4caf50;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.pricing-card {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+  transform: translateY(-4px);
+}
+
+.pricing-card.popular {
+  border-color: #667eea;
+  border-width: 3px;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.tier-badge {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.tier-name {
+  font-size: 1.75rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.tier-rank {
+  text-align: center;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.price {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.currency {
+  font-size: 1.5rem;
+  color: #666;
+  vertical-align: super;
+}
+
+.amount {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.period {
+  font-size: 1rem;
+  color: #666;
+}
+
+.xp-reward {
+  text-align: center;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 237, 78, 0.2));
+  border-radius: 12px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.features-list {
+  list-style: none;
+  margin-bottom: 2rem;
+  flex: 1;
+}
+
+.features-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #666;
+}
+
+.features-list li:last-child {
+  border-bottom: none;
+}
+
+.check {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.select-btn {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.select-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.select-btn.popular {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.select-btn.popular:hover {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.pricing-footer {
+  text-align: center;
+  color: #666;
+  line-height: 1.8;
+}
+
+.pricing-footer p {
+  margin-bottom: 0.5rem;
+}
