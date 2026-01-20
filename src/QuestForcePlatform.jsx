@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Check, X, Zap, TrendingUp, Users, Award, Search, Filter, Star, Download, BarChart3, Globe, MessageSquare, Sparkles, ChevronRight, ArrowRight, DollarSign, Calendar, Activity, Shield, Rocket, Brain, Cpu, Network, Target, Plus, Lock, Send } from 'lucide-react';
 
+// Live metrics update configuration
+const METRICS_UPDATE_INTERVAL = 2000; // milliseconds
+const METRICS_VARIANCE = {
+  activeAgents: { min: -1, max: 1 },
+  questsRunning: { min: -5, max: 5 },
+  apiCallsPerMin: { min: -50, max: 50 },
+  successRate: { min: -0.25, max: 0.25 }
+};
+const SUCCESS_RATE_BOUNDS = { min: 90, max: 99.9 };
+
 const QuestForcePlatform = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [selectedPlan, setSelectedPlan] = useState('pro');
@@ -20,12 +30,12 @@ const QuestForcePlatform = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setLiveMetrics(prev => ({
-        activeAgents: prev.activeAgents + Math.floor(Math.random() * 3) - 1,
-        questsRunning: prev.questsRunning + Math.floor(Math.random() * 10) - 5,
-        apiCallsPerMin: prev.apiCallsPerMin + Math.floor(Math.random() * 100) - 50,
-        successRate: Math.min(99.9, Math.max(90, prev.successRate + (Math.random() - 0.5) * 0.5))
+        activeAgents: prev.activeAgents + Math.floor(Math.random() * (METRICS_VARIANCE.activeAgents.max - METRICS_VARIANCE.activeAgents.min + 1)) + METRICS_VARIANCE.activeAgents.min,
+        questsRunning: prev.questsRunning + Math.floor(Math.random() * (METRICS_VARIANCE.questsRunning.max - METRICS_VARIANCE.questsRunning.min + 1)) + METRICS_VARIANCE.questsRunning.min,
+        apiCallsPerMin: prev.apiCallsPerMin + Math.floor(Math.random() * (METRICS_VARIANCE.apiCallsPerMin.max - METRICS_VARIANCE.apiCallsPerMin.min + 1)) + METRICS_VARIANCE.apiCallsPerMin.min,
+        successRate: Math.min(SUCCESS_RATE_BOUNDS.max, Math.max(SUCCESS_RATE_BOUNDS.min, prev.successRate + (Math.random() - 0.5) * (METRICS_VARIANCE.successRate.max - METRICS_VARIANCE.successRate.min)))
       }));
-    }, 2000);
+    }, METRICS_UPDATE_INTERVAL);
     return () => clearInterval(interval);
   }, []);
 
