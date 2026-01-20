@@ -38,10 +38,19 @@ function LiveDashboard({ metrics }: LiveDashboardProps) {
   ]
 
   useEffect(() => {
+    const agentNames = [
+      'CodeAgent-Alpha',
+      'DataProcessor-Beta',
+      'TestRunner-Gamma',
+      'SecurityScan-Delta',
+      'DocWriter-Epsilon',
+      'APIMonitor-Zeta'
+    ]
+    
     const interval = setInterval(() => {
       const newActivity: Activity = {
         id: Date.now(),
-        agent: agents[Math.floor(Math.random() * agents.length)].name,
+        agent: agentNames[Math.floor(Math.random() * agentNames.length)],
         action: [
           'Completed code review',
           'Deployed new feature',

@@ -56,7 +56,7 @@ function AIChat() {
 
     setTimeout(() => {
       const aiMessage: Message = {
-        id: Date.now() + 1,
+        id: Date.now(),
         text: aiResponses[Math.floor(Math.random() * aiResponses.length)],
         sender: 'ai',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -66,7 +66,7 @@ function AIChat() {
     }, 1500)
   }
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
@@ -121,7 +121,7 @@ function AIChat() {
           placeholder="Type your message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyDown}
         />
         <button className="send-btn" onClick={handleSend} disabled={!input.trim()}>
           📤 Send
