@@ -36,6 +36,47 @@ npm run lint         # Run ESLint
 - Follow existing TailwindCSS patterns for styling
 - Place reusable components in `/components`
 - Use `'use client'` directive for client-side components
+- Import paths use `@/` alias for project root (e.g., `@/components/Button`)
+- Use descriptive variable and function names that reflect their purpose
+
+### Code Style Examples
+
+**Good TypeScript Component:**
+```typescript
+'use client'
+
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+
+interface DashboardProps {
+  userId: string
+  initialData: DashboardData
+}
+
+export function Dashboard({ userId, initialData }: DashboardProps) {
+  const [data, setData] = useState(initialData)
+  
+  return (
+    <div className="flex flex-col gap-4 p-6">
+      {/* Component content */}
+    </div>
+  )
+}
+```
+
+**Good API Route (App Router):**
+```typescript
+import { NextResponse } from 'next/server'
+
+export async function GET(request: Request) {
+  try {
+    // API logic
+    return NextResponse.json({ data })
+  } catch (error) {
+    return NextResponse.json({ error: 'Internal error' }, { status: 500 })
+  }
+}
+```
 
 ## Payment Integration Setup
 
@@ -96,3 +137,60 @@ When implementing payment features:
 - Test all subscription flows: signup, upgrade, downgrade, cancellation
 - Verify webhook handling with Stripe CLI: `stripe listen --forward-to localhost:3000/api/webhooks/stripe`
 - For App Router, create the webhook handler at `app/api/webhooks/stripe/route.ts`
+
+## Boundaries and Constraints
+
+### What You MUST NOT Do
+
+- **Never** commit API keys, secrets, or sensitive credentials to version control
+- **Never** modify or delete files in `.git/` directory
+- **Never** create or modify files outside the project directory
+- **Never** disable TypeScript strict mode or use `@ts-ignore` without a detailed comment explaining why
+- **Never** remove error handling from API routes
+- **Never** modify `package-lock.json` directly (use `npm install` instead)
+- **Never** bypass authentication checks in payment processing logic
+- **Never** hardcode URLs or environment-specific values in components
+
+### What You SHOULD Do
+
+- **Always** validate user input before processing
+- **Always** handle errors gracefully with user-friendly messages
+- **Always** test components manually after making changes
+- **Always** check that environment variables are properly configured before using external APIs
+- **Always** follow the existing code patterns in the file you're modifying
+- **Always** ensure responsive design works on mobile, tablet, and desktop
+- **Always** use semantic HTML elements for accessibility
+
+## File Organization
+
+- **`/app`**: Next.js App Router pages and layouts (server components by default)
+- **`/components`**: Shared, reusable React components
+- **`/src/components`**: Platform-specific components for the AI Task Force features
+- **`/app/api`**: API routes for backend functionality
+- **`/public`**: Static assets like images and fonts
+
+## Working with State Management
+
+This project uses Zustand for state management. When adding global state:
+
+```typescript
+import { create } from 'zustand'
+
+interface StoreState {
+  count: number
+  increment: () => void
+}
+
+export const useStore = create<StoreState>((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 }))
+}))
+```
+
+## Accessibility Guidelines
+
+- Use semantic HTML elements (`<button>`, `<nav>`, `<main>`, etc.)
+- Ensure all interactive elements are keyboard accessible
+- Provide `aria-label` for icon-only buttons
+- Maintain proper color contrast ratios (WCAG AA minimum)
+- Test with screen readers when adding complex UI interactions
