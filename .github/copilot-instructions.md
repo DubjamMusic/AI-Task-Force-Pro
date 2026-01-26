@@ -66,7 +66,7 @@ npm run analyze      # Analyze bundle size with Next.js bundle analyzer
 
 ### File Organization
 - TypeScript files use `.tsx` extension for components, `.ts` for utilities
-- One component per file, named exports for components
+- One component per file; prefer named exports for better tree shaking
 - Group related utilities in the same file
 - Import order: React/Next, third-party libraries, local components, utilities, types
 - Use path aliases with `@/*` notation (e.g., `@/components/Button`)
@@ -120,7 +120,7 @@ npm run analyze      # Analyze bundle size with Next.js bundle analyzer
 - UI: Radix UI components, Framer Motion for animations
 - State: Zustand (lightweight state management)
 - Visualization: Recharts for charts, ReactFlow for node graphs
-- Utilities: date-fns, nanoid, clsx, tailwind-merge
+- Utilities: date-fns, nanoid, clsx, tailwind-merge, class-variance-authority (CVA)
 
 ## Testing Guidelines
 
@@ -207,7 +207,13 @@ interface AgentCardProps {
   onActivate: (id: string) => void;
 }
 
-export default function AgentCard({ name, status, onActivate }: AgentCardProps) {
+const STATUS_STYLES = {
+  active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100',
+  idle: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100',
+  error: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100',
+} as const;
+
+export function AgentCard({ name, status, onActivate }: AgentCardProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClick = async () => {
@@ -222,11 +228,7 @@ export default function AgentCard({ name, status, onActivate }: AgentCardProps) 
   return (
     <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700">
       <h3 className="text-lg font-semibold">{name}</h3>
-      <span className={`inline-block px-2 py-1 rounded text-sm ${
-        status === 'active' ? 'bg-green-100 text-green-800' :
-        status === 'idle' ? 'bg-yellow-100 text-yellow-800' :
-        'bg-red-100 text-red-800'
-      }`}>
+      <span className={`inline-block px-2 py-1 rounded text-sm ${STATUS_STYLES[status]}`}>
         {status}
       </span>
       <Button onClick={handleClick} disabled={isLoading}>
@@ -279,7 +281,7 @@ export async function POST(request: NextRequest) {
 2. Use `'use client'` if it uses hooks or client-side features
 3. Define proper TypeScript interfaces for props
 4. Use Tailwind for styling
-5. Export as default
+5. Prefer named exports for better tree shaking and refactoring
 
 ### Adding a New Page (App Router)
 1. Create file/folder in `/app` directory
