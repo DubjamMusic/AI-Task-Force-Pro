@@ -50,11 +50,19 @@ export default function AgentCard({ id, name, status, onStatusChange }: AgentCar
     processing: 'bg-blue-500',
   };
 
+  const handleClick = () => {
+    // Example usage of optional callback
+    onStatusChange?.(id, status);
+  };
+
   return (
     <div 
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 transition-transform hover:scale-105"
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 transition-transform ${
+        isHovered ? 'scale-105' : 'scale-100'
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       <div className="flex items-center gap-3">
         <div className={`w-3 h-3 rounded-full ${statusColors[status]}`} />
@@ -82,6 +90,9 @@ Maintain the **"Cyberpunk/Professional"** aesthetic:
 - **Neon Accents**: Blue, purple, and pink hues for CTAs and highlights
 
 **Design Pattern Examples:**
+
+These are JSX snippets showing common patterns used throughout the application. Use these within your component functions:
+
 ```typescript
 // Hero Section
 <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-xl p-8 text-white">
@@ -198,6 +209,9 @@ import { motion } from 'framer-motion';
 Follow the existing patterns for simulating real-time AI interactions:
 
 ```typescript
+import { useEffect } from 'react';
+
+// Inside your component
 useEffect(() => {
   const interval = setInterval(() => {
     setAgents(prevAgents =>
