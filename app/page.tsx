@@ -6,8 +6,9 @@ import WorkflowTemplates from '@/components/WorkflowTemplates';
 import AIChat from '@/components/AIChat';
 import PricingPlans from '@/components/PricingPlans';
 import GamificationStats from '@/components/GamificationStats';
+import AgentCard from '@/components/AgentCard';
 
-type View = 'dashboard' | 'templates' | 'chat' | 'pricing';
+type View = 'dashboard' | 'templates' | 'chat' | 'pricing' | 'agents';
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<View>('dashboard');
@@ -28,6 +29,7 @@ export default function Home() {
                 <div className="flex space-x-4">
                   {[
                     { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+                    { id: 'agents', label: 'Agents', icon: '🤖' },
                     { id: 'templates', label: 'Templates', icon: '📋' },
                     { id: 'chat', label: 'AI Chat', icon: '💬' },
                     { id: 'pricing', label: 'Pricing', icon: '💳' },
@@ -80,6 +82,63 @@ export default function Home() {
               <div>
                 <GamificationStats />
               </div>
+            </div>
+          </div>
+        )}
+
+        {currentView === 'agents' && (
+          <div className="space-y-8">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+              <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
+                Agent Gallery
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400">
+                View and manage your AI agents with detailed status information
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <AgentCard
+                id="agent-001-alpha"
+                name="Data Processing Agent"
+                status="active"
+                description="Handles real-time data processing and analytics tasks with high efficiency"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
+              <AgentCard
+                id="agent-002-beta"
+                name="Content Generator"
+                status="active"
+                description="Creates high-quality content using advanced NLP models"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
+              <AgentCard
+                id="agent-003-gamma"
+                name="Code Reviewer"
+                status="idle"
+                description="Analyzes code for bugs, security issues, and optimization opportunities"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
+              <AgentCard
+                id="agent-004-delta"
+                name="Task Scheduler"
+                status="active"
+                description="Optimizes task scheduling and resource allocation"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
+              <AgentCard
+                id="agent-005-epsilon"
+                name="Error Handler"
+                status="error"
+                description="Monitors system health and handles errors automatically"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
+              <AgentCard
+                id="agent-006-zeta"
+                name="Performance Monitor"
+                status="idle"
+                description="Tracks and reports on system performance metrics"
+                onAction={(id) => console.log('Viewing agent:', id)}
+              />
             </div>
           </div>
         )}
