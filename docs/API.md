@@ -878,7 +878,7 @@ Create a new subscription for a user.
 |------|-----------|------------------|---------------|----------|
 | `starter` | 3 | 20 | $29 | Basic analytics, Email support |
 | `professional` | 10 | 100 | $99 | Advanced analytics, Priority support, Custom workflows, API access |
-| `enterprise` | Unlimited | Unlimited | $299 | Enterprise analytics, 24/7 support, Custom integrations, SLA guarantee, On-premise deployment |
+| `enterprise` | Unlimited | Unlimited | $299 | Enterprise analytics, 24/7 dedicated support, Custom integrations, SLA guarantee, On-premise deployment |
 
 **Example Request:**
 
